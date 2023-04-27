@@ -6,7 +6,8 @@ const menu = ref(null)
 
 const toggleMenu = () => {
   if (menu.value === null) return
-  menu.value.toggleDrawer()
+  const ctrl:any = menu.value
+  ctrl.toggleDrawer()
 }
 
 const loadMenus = () => {
