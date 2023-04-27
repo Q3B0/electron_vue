@@ -24,11 +24,15 @@ const handleWinOp = (type: Number) => {
     }
   }
 }
+const emit = defineEmits(['toggle'])
+const handleToggle = () => {
+  emit("toggle")
+}
 </script>
 
 <template>
-  <v-toolbar density="compact">
-    <v-app-bar-nav-icon></v-app-bar-nav-icon>
+  <v-toolbar density="compact" color="primary">
+    <v-app-bar-nav-icon @click="handleToggle"></v-app-bar-nav-icon>
 
     <v-toolbar-title style="-webkit-app-region: drag">{{ title }}</v-toolbar-title>
 
