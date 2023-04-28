@@ -4,12 +4,18 @@ import {
   BrowserWindowConstructorOptions,
   ipcMain,
   screen,
+  dialog
 } from "electron";
 import path from "path";
 import { isDev } from "./config";
 import { appConfig } from "./ElectronStore/Configuration";
 import AppUpdater from "./AutoUpdate";
 
+async function handleFileOpen(){
+  return dialog.showOpenDialog({
+    properties: ['openFile']
+  });
+}
 async function createWindow() {
   const { width, height } = screen.getPrimaryDisplay().workAreaSize;
   const appBounds: any = appConfig.get("setting.appBounds");
@@ -62,6 +68,7 @@ async function createWindow() {
     mainWindow.webContents.openDevTools();
   }
 
+  ipcMain.handle('dialog:openFile', handleFileOpen);
   ipcMain.on("min-app", () => {
     if (mainWindow) {
       mainWindow.minimize();
